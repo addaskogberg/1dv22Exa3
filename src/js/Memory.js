@@ -16,7 +16,10 @@ function playMemory (rows, cols, container) {
   tiles = getPictureArray(rows, cols)
 
   container = document.getElementById(container)
-  var templateDiv = document.querySelectorAll('#memoryContainer template')[0].content.firstElementChild
+  // container = document.getElementsByClassName(container)
+  // console.log(container[0])
+  // var templateDiv = document.querySelectorAll('#memoryContainer template')[0].content.firstElementChild
+  var templateDiv = container.childNodes[0].childNodes[0]
 
   var div = document.importNode(templateDiv, false)
 

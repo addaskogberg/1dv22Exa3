@@ -73,6 +73,14 @@ button{
   background-color: lightcoral;
 }
 
+.memory img{
+  width: 70px;
+}
+
+.memory .removed {
+  visibility: hidden;
+}
+
 .window2{
   position:absolute; 
   top: 100px; 
