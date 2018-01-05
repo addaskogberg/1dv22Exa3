@@ -37,8 +37,8 @@ function desktop () {
     topbarW1.setAttribute('class', 'topbarW1')
     window1.appendChild(topbarW1)
 
-    // let text1 = document.createTextNode('My Window')
-    // window1.appendChild(text1)
+    let text1 = document.createTextNode('My Window')
+    window1.appendChild(text1)
 
     let memoryContainer = document.createElement('div')
     memoryContainer.setAttribute('id', 'memoryContainer')
@@ -58,6 +58,9 @@ function desktop () {
     let img = document.createElement('img')
     img.setAttribute('src', '../image/0.png')
     img.setAttribute('alt', 'A memory brick')
+    img.addEventListener('focusin', WindowFocusin)
+    img.addEventListener('focusout', WindowFocusout)
+
     anchor.appendChild(img)
 
     if (tabindex > 0) {
@@ -68,7 +71,8 @@ function desktop () {
     document.body.appendChild(window1)
 
     var memory = require('./Memory')
-    memory.playMemory(4, 4, 'memoryContainer')
+    // memory.playMemory(4, 4, 'memoryContainer')
+    memory.playMemory(4, 4, memoryContainer)
     tabindex++
   }
 
@@ -138,13 +142,19 @@ function desktop () {
   }
 
   function WindowFocusin (event) {
-    console.log('Element got focus')
-    event.target.style.zIndex = 100
+    console.log('Element got focus ' + String(event.target.nodeName))
+    if (String(event.target.nodeName) !== 'A') {
+      event.target.style.zIndex = 100
+      console.log('Not an A tag 100')
+    }
   }
 
   function WindowFocusout (event) {
-    console.log('Element lost focus')
-    event.target.style.zIndex = 0
+    console.log('Element lost focus ' + String(event.target.nodeName))
+    if (String(event.target.nodeName) !== 'A') {
+      event.target.style.zIndex = 0
+      console.log('Not an A tag 0')
+    }
   }
 }
 

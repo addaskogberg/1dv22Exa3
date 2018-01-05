@@ -49,8 +49,8 @@ button{
   position:absolute; 
   top: 100px; 
   left: 100px; 
-  height: 240px; 
-  width: 320px; 
+  height: 345px; 
+  width: 282px; 
   background-color: green;
   border: 1px solid black;
 }
@@ -58,7 +58,7 @@ button{
 .buttonW1 {
   position: relative;
   top: 0;
-  left: 288px;
+  left: 250px;
   width: 32px;
   height: 32px;
   background-image: url("../image/buttonW1.png");
@@ -66,9 +66,9 @@ button{
 
 .topbarW1 {
   position: relative;
-  top: -36px;
+  top: -32px;
   left: 0;
-  width: 288px;
+  width: 250px;
   height: 32px;
   background-color: lightcoral;
 }
