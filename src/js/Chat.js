@@ -76,7 +76,7 @@ Chat.prototype.printMessage = function (message) {
   messageDiv.childNodes[0].textContent = message.data
   messageDiv.childNodes[1].textContent = message.username
 
-  this.chatDiv.childNodes[0].appendChild(messageDiv)
+  this.chatDiv.childNodes[0].insertBefore(messageDiv, this.chatDiv.childNodes[0].childNodes[0])
 }
 
 module.exports = Chat

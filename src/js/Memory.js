@@ -67,9 +67,14 @@ function playMemory (rows, cols, container) {
         window.setTimeout(function () {
           turn1.parentNode.classList.add('removed')
           turn2.parentNode.classList.add('removed')
+          var window1 = turn2.parentNode.parentNode.parentNode.parentNode
 
           turn1 = null
           turn2 = null
+          window.setTimeout(function () {
+            console.log(window1)
+            window1.style.zIndex = 100
+          }, 0)
         }, 300)
       } else {
         window.setTimeout(function () {

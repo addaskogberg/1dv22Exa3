@@ -100,7 +100,7 @@ function desktop () {
     topbarW1.setAttribute('class', 'topbarW1')
     window2.appendChild(topbarW1)
 
-    let text1 = document.createTextNode('My Window')
+    let text1 = document.createTextNode('')
     window2.appendChild(text1)
 
     let chatContainer = document.createElement('div')
@@ -125,6 +125,7 @@ function desktop () {
     let messageText = document.createElement('textarea')
     messageText.setAttribute('class', 'messageArea')
     chatDiv.appendChild(messageText)
+    // window2.appendChild(messageText)
 
     document.body.appendChild(window2)
 
@@ -176,17 +177,17 @@ function desktop () {
 
   function WindowFocusin (event) {
     console.log('Element got focus ' + String(event.target.nodeName))
-    if (String(event.target.nodeName) !== 'A') {
-      event.target.style.zIndex = 100
-      console.log('Not an A tag 100')
+    event.target.style.zIndex = 100
+    if (String(event.target.nodeName) !== 'DIV') {
+      event.target.parentNode.parentNode.parentNode.style.zIndex = 100
     }
   }
 
   function WindowFocusout (event) {
     console.log('Element lost focus ' + String(event.target.nodeName))
-    if (String(event.target.nodeName) !== 'A') {
-      event.target.style.zIndex = 0
-      console.log('Not an A tag 0')
+    event.target.style.zIndex = 0
+    if (String(event.target.nodeName) !== 'DIV') {
+      event.target.parentNode.parentNode.parentNode.style.zIndex = 0
     }
   }
 }
