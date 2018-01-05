@@ -103,6 +103,14 @@ function desktop () {
 
     document.body.appendChild(window2)
 
+    var Chat = require('./Chat')
+
+    var chat = new Chat(document.querySelector('#chatContainer'))
+
+    chat.connect().then(function (socket) {
+  // chat.sendMessage('Hello')
+    })
+
     if (tabindex > 0) {
       window2.style.top = 100 + tabindex * 33 + 'px'
       window2.style.left = 100 + tabindex * 33 + 'px'
