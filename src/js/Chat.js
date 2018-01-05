@@ -2,8 +2,9 @@ var config = require('./config.json')
 
 function Chat (container) {
   this.socket = null
-  var template = document.querySelector('#chat')
-  this.chatDiv = document.importNode(template.content.firstElementChild, true)
+  var chatContainer = container.childNodes[3]
+  var template = container.childNodes[4]
+  this.chatDiv = template.childNodes[0]
 
   this.chatDiv.addEventListener('keypress', function (event) {
     // listen for enter key
@@ -15,7 +16,7 @@ function Chat (container) {
       event.preventDefault()
     }
   }.bind(this))
-  container.appendChild(this.chatDiv)
+  chatContainer.appendChild(this.chatDiv)
 }
 
 Chat.prototype.connect = function () {
@@ -24,7 +25,7 @@ Chat.prototype.connect = function () {
       resolve(this.socket)
       return
     }
-    this.socket = new window.WebSocket(config.address) // added window.
+    this.socket = new window.WebSocket(config.address)
 
     this.socket.addEventListener('open', function () {
       resolve(this.socket)
@@ -34,7 +35,7 @@ Chat.prototype.connect = function () {
       reject(new Error('could not connect'))
     })
 
-    this.socket.addEventListener('message', function (event) { // added event as parameter in function
+    this.socket.addEventListener('message', function (event) {
       var message = JSON.parse(event.data)
       if (message.type === 'message') {
         this.printMessage(message)
@@ -61,14 +62,21 @@ Chat.prototype.sendMessage = function (text) {
 }
 
 Chat.prototype.printMessage = function (message) {
-  var template = this.chatDiv.querySelectorAll('template')[0]
+  let messageDiv = document.createElement('div')
+  messageDiv.setAttribute('class', 'message')
 
-  var messageDiv = document.importNode(template.content.firstElementChild, true)
+  let pText = document.createElement('p')
+  pText.setAttribute('class', 'text')
+  messageDiv.appendChild(pText)
 
-  messageDiv.querySelectorAll('.text')[0].textContent = message.data
-  messageDiv.querySelectorAll('.author')[0].textContent = message.username
+  let pAuthor = document.createElement('p')
+  pAuthor.setAttribute('class', 'author')
+  messageDiv.appendChild(pAuthor)
 
-  this.chatDiv.querySelectorAll('.messages')[0].appendChild(messageDiv)
+  messageDiv.childNodes[0].textContent = message.data
+  messageDiv.childNodes[1].textContent = message.username
+
+  this.chatDiv.childNodes[0].appendChild(messageDiv)
 }
 
 module.exports = Chat

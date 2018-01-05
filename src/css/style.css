@@ -1,7 +1,7 @@
 body{
   background-image: url("../image/desktop-background.png");
   background-repeat: repeat-x;
-  color: rgb(139, 139, 187);
+  color: rgb(24, 24, 182);
 }
 
 h1{
@@ -87,6 +87,6 @@ button{
   left: 100px; 
   height: 240px; 
   width: 320px; 
-  background-color: red;
+  background-color: rgb(255, 255, 255);
   border: 1px solid black;
 }

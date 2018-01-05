@@ -54,12 +54,14 @@ function desktop () {
     let anchor = document.createElement('a')
     anchor.setAttribute('href', '#')
     memoryDiv.appendChild(anchor)
+    anchor.addEventListener('focusin', WindowFocusin)
+    anchor.addEventListener('focusout', WindowFocusout)
 
     let img = document.createElement('img')
     img.setAttribute('src', '../image/0.png')
     img.setAttribute('alt', 'A memory brick')
-    img.addEventListener('focusin', WindowFocusin)
-    img.addEventListener('focusout', WindowFocusout)
+    // img.addEventListener('focusin', WindowFocusin)
+    // img.addEventListener('focusout', WindowFocusout)
 
     anchor.appendChild(img)
 
@@ -101,14 +103,37 @@ function desktop () {
     let text1 = document.createTextNode('My Window')
     window2.appendChild(text1)
 
+    let chatContainer = document.createElement('div')
+    chatContainer.setAttribute('id', 'chatContainer')
+    window2.appendChild(chatContainer)
+
+    let chatTemplate = document.createElement('template')
+    chatTemplate.setAttribute('id', 'chat')
+    window2.appendChild(chatTemplate)
+
+    let chatDiv = document.createElement('div')
+    chatDiv.setAttribute('class', 'chat')
+    chatTemplate.appendChild(chatDiv)
+
+    let messagesDiv = document.createElement('div')
+    messagesDiv.setAttribute('class', 'messages')
+    chatDiv.appendChild(messagesDiv)
+
+    let messageTemplate = document.createElement('template')
+    messagesDiv.appendChild(messageTemplate)
+
+    let messageText = document.createElement('textarea')
+    messageText.setAttribute('class', 'messageArea')
+    chatDiv.appendChild(messageText)
+
     document.body.appendChild(window2)
 
     var Chat = require('./Chat')
 
-    var chat = new Chat(document.querySelector('#chatContainer'))
+    var chat = new Chat(window2)
 
     chat.connect().then(function (socket) {
-  // chat.sendMessage('Hello')
+      // chat.sendMessage('Hello')
     })
 
     if (tabindex > 0) {
