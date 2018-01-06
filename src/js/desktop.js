@@ -9,6 +9,9 @@ function desktop () {
     document.getElementById('button2').onclick = function () {
       StartApp2()
     }
+    document.getElementById('button3').onclick = function () {
+      StartApp3()
+    }
   })
 
   var xStart
@@ -124,6 +127,9 @@ function desktop () {
 
     let messageText = document.createElement('textarea')
     messageText.setAttribute('class', 'messageArea')
+    messageText.style.position = 'relative'
+    messageText.style.top = '-290px'
+    messageText.style.left = '10px'
     chatDiv.appendChild(messageText)
     // window2.appendChild(messageText)
 
@@ -140,6 +146,57 @@ function desktop () {
     if (tabindex > 0) {
       window2.style.top = 100 + tabindex * 33 + 'px'
       window2.style.left = 100 + tabindex * 33 + 'px'
+    }
+
+    tabindex++
+  }
+
+  function StartApp3 () {
+    let window3 = document.createElement('div')
+    window3.setAttribute('class', 'window2')
+    window3.setAttribute('draggable', 'true')
+    window3.setAttribute('tabindex', tabindex)
+    window3.addEventListener('dragstart', DragStarted)
+    window3.addEventListener('dragend', DragEnded)
+    window3.addEventListener('focusin', WindowFocusin)
+    window3.addEventListener('focusout', WindowFocusout)
+
+    let buttonW1 = document.createElement('button')
+    buttonW1.setAttribute('class', 'buttonW1')
+    window3.appendChild(buttonW1)
+
+    buttonW1.onclick = function () {
+      window3.remove()
+    }
+
+    let topbarW1 = document.createElement('div')
+    topbarW1.setAttribute('class', 'topbarW1')
+    window3.appendChild(topbarW1)
+
+    let text1 = document.createTextNode('')
+    window3.appendChild(text1)
+
+    let videoView = document.createElement('video')
+    videoView.setAttribute('id', 'video')
+    videoView.setAttribute('autoplay', 'autoplay')
+    videoView.style.width = '320'
+    videoView.style.height = '240'
+    window3.appendChild(videoView)
+
+    let canvas = document.createElement('canvas')
+    canvas.setAttribute('id', 'canvas')
+    canvas.style.width = '320'
+    canvas.style.height = '240'
+    window3.appendChild(canvas)
+
+    document.body.appendChild(window3)
+
+    var video = require('./video')
+    video.startVideo()
+
+    if (tabindex > 0) {
+      window3.style.top = 100 + tabindex * 33 + 'px'
+      window3.style.left = 100 + tabindex * 33 + 'px'
     }
 
     tabindex++

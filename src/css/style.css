@@ -43,6 +43,13 @@ button{
   width: 64px;
   background-image: url("../image/chatIcon.png");
 }
+#button3{
+  position: absolute;
+  left: 128px;
+  height: 64px;
+  width: 64px;
+  background-image: url("../image/video.png");
+}
 
 /* Dynamic content */
 .window1{
@@ -91,17 +98,12 @@ button{
   border: 1px solid black;
 }
 
-.messages{
+.messages {
   height: 262px; 
   width: 281px; 
   overflow-y: scroll;
 }
 
-textarea {
-  position: relative;
-  margin-top: -290px;
-  margin-left: 10px;
-}
-p{
+p {
   margin-left: 10px;
 }
