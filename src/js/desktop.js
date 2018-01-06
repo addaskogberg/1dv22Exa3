@@ -99,9 +99,9 @@ function desktop () {
       window2.remove()
     }
 
-    let topbarW1 = document.createElement('div')
-    topbarW1.setAttribute('class', 'topbarW1')
-    window2.appendChild(topbarW1)
+    let topbarW2 = document.createElement('div')
+    topbarW2.setAttribute('class', 'topbarW2')
+    window2.appendChild(topbarW2)
 
     let text1 = document.createTextNode('')
     window2.appendChild(text1)
@@ -128,7 +128,7 @@ function desktop () {
     let messageText = document.createElement('textarea')
     messageText.setAttribute('class', 'messageArea')
     messageText.style.position = 'relative'
-    messageText.style.top = '-290px'
+    messageText.style.top = '-333px'
     messageText.style.left = '10px'
     chatDiv.appendChild(messageText)
     // window2.appendChild(messageText)
@@ -153,7 +153,7 @@ function desktop () {
 
   function StartApp3 () {
     let window3 = document.createElement('div')
-    window3.setAttribute('class', 'window2')
+    window3.setAttribute('class', 'window3')
     window3.setAttribute('draggable', 'true')
     window3.setAttribute('tabindex', tabindex)
     window3.addEventListener('dragstart', DragStarted)
@@ -165,13 +165,9 @@ function desktop () {
     buttonW1.setAttribute('class', 'buttonW1')
     window3.appendChild(buttonW1)
 
-    buttonW1.onclick = function () {
-      window3.remove()
-    }
-
-    let topbarW1 = document.createElement('div')
-    topbarW1.setAttribute('class', 'topbarW1')
-    window3.appendChild(topbarW1)
+    let topbarW3 = document.createElement('div')
+    topbarW3.setAttribute('class', 'topbarW3')
+    window3.appendChild(topbarW3)
 
     let text1 = document.createTextNode('')
     window3.appendChild(text1)
@@ -179,27 +175,36 @@ function desktop () {
     let videoView = document.createElement('video')
     videoView.setAttribute('id', 'video')
     videoView.setAttribute('autoplay', 'autoplay')
-    videoView.style.width = '320'
-    videoView.style.height = '240'
+    videoView.style.width = '280px'
+    videoView.style.height = '210px'
     window3.appendChild(videoView)
-
+/*
     let canvas = document.createElement('canvas')
     canvas.setAttribute('id', 'canvas')
-    canvas.style.width = '320'
-    canvas.style.height = '240'
+    canvas.style.width = '280px'
+    canvas.style.height = '210px'
     window3.appendChild(canvas)
-
+*/
     document.body.appendChild(window3)
 
     var video = require('./video')
     video.startVideo()
 
+    buttonW1.onclick = function () {
+      video.stopVideo()
+      window3.remove()
+    }
+
     if (tabindex > 0) {
       window3.style.top = 100 + tabindex * 33 + 'px'
       window3.style.left = 100 + tabindex * 33 + 'px'
     }
-
     tabindex++
+
+    var button3 = document.getElementById('button3')
+    button3.disabled = true
+    button3.style.opacity = 0.4
+    button3.title = 'Only one video is allowed'
   }
 
   function DragStarted (event) {

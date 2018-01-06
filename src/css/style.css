@@ -52,11 +52,12 @@ button{
 }
 
 /* Dynamic content */
+/* Memory window */
 .window1{
   position:absolute; 
   top: 100px; 
   left: 100px; 
-  height: 345px; 
+  height: 380px; 
   width: 282px; 
   background-color: green;
   border: 1px solid black;
@@ -73,11 +74,11 @@ button{
 
 .topbarW1 {
   position: relative;
-  top: -32px;
+  top: -36px;
   left: 0;
   width: 250px;
   height: 32px;
-  background-color: lightcoral;
+  background-color: rgb(141, 240, 128);
 }
 
 .memory img{
@@ -88,18 +89,33 @@ button{
   visibility: hidden;
 }
 
+/* Chat window */
 .window2{
   position:absolute; 
   top: 100px; 
   left: 100px; 
-  height: 345px; 
+  height: 380px; 
   width: 282px; 
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(240, 240, 240);
   border: 1px solid black;
 }
 
+.topbarW2 {
+  position: relative;
+  top: -36px;
+  left: 0;
+  width: 250px;
+  height: 32px;
+  background-color: rgb(165, 164, 164);
+}
+
+.chat {
+  height: 250px;
+}
+
 .messages {
-  height: 262px; 
+  margin-top: 30px;
+  height: 280px; 
   width: 281px; 
   overflow-y: scroll;
 }
@@ -107,3 +123,25 @@ button{
 p {
   margin-left: 10px;
 }
+
+/* Video window */
+.window3{
+  position:absolute; 
+  top: 100px; 
+  left: 100px; 
+  height: 280px; 
+  width: 282px;
+  padding-left: 1px; 
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+}
+
+.topbarW3 {
+  position: relative;
+  top: -36px;
+  left: -1px;
+  width: 250px;
+  height: 32px;
+  background-color: lightcoral;
+}
+

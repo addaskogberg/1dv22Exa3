@@ -1,4 +1,6 @@
 var config = require('./config.json')
+var username = 'Fiona'
+console.log(username)
 
 function Chat (container) {
   this.socket = null
@@ -48,7 +50,7 @@ Chat.prototype.sendMessage = function (text) {
   var data = {
     type: 'message',
     data: text,
-    username: 'as224wq',
+    username: username,
     channel: '',
     key: config.key
   }

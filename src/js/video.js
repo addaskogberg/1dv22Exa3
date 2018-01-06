@@ -1,15 +1,31 @@
 module.exports = {
-  startVideo: startVideo
+  startVideo: startVideo,
+  stopVideo: stopVideo
 }
+var videoStream
+var video = document.getElementById('video')
 function startVideo () {
 // Grab elements, create settings, etc.
-  var video = document.getElementById('video')
 
 // access camera, microphone and loudspeakers
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(function (stream) {
+      videoStream = stream
       video.src = window.URL.createObjectURL(stream)
       video.play()
+      /* let tracks = stream.getTracks()
+      tracks.forEach(function (track) {
+        track.stop()
+      })
+      video.srcObject = null */
     })
   }
+}
+
+function stopVideo () {
+  let tracks = videoStream.getTracks()
+  tracks.forEach(function (track) {
+    track.stop()
+  })
+  video.srcObject = null
 }
