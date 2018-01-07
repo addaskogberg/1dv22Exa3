@@ -67,7 +67,7 @@ function playMemory (rows, cols, container) {
         if (pairs === (cols * rows) / 2) {
           console.log('win on' + tries + 'number of tries')
          // result.childNodes[0] = 'test'
-          result.textContent = 'test'
+          result.textContent = 'You won on ' + tries + ' number of tries'
         }
         window.setTimeout(function () {
           turn1.parentNode.classList.add('removed')
