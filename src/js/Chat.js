@@ -1,6 +1,5 @@
 var config = require('./config.json')
-var username = 'Fiona'
-console.log(username)
+var username = window.localStorage.getItem('username')
 
 function Chat (container) {
   this.socket = null
@@ -79,6 +78,10 @@ Chat.prototype.printMessage = function (message) {
   messageDiv.childNodes[1].textContent = message.username
 
   this.chatDiv.childNodes[0].insertBefore(messageDiv, this.chatDiv.childNodes[0].childNodes[0])
+}
+
+Chat.prototype.setUsername = function (name) {
+  username = name
 }
 
 module.exports = Chat

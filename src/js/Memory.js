@@ -19,7 +19,10 @@ function playMemory (rows, cols, container) {
   // container = document.getElementsByClassName(container)
   // console.log(container[0])
   // var templateDiv = document.querySelectorAll('#memoryContainer template')[0].content.firstElementChild
-  var templateDiv = container.childNodes[0].childNodes[0]
+  var templateDiv = container.childNodes[3].childNodes[0].childNodes[0]
+  var result = container.childNodes[2]
+ // console.log(templateDiv)
+ // console.log(result)
 
   var div = document.importNode(templateDiv, false)
 
@@ -63,6 +66,8 @@ function playMemory (rows, cols, container) {
 
         if (pairs === (cols * rows) / 2) {
           console.log('win on' + tries + 'number of tries')
+         // result.childNodes[0] = 'test'
+          result.textContent = 'test'
         }
         window.setTimeout(function () {
           turn1.parentNode.classList.add('removed')

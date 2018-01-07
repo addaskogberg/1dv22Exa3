@@ -1,22 +1,33 @@
-
 function desktop () {
 // Wait for HTML to load
   document.addEventListener('DOMContentLoaded', function () {
+    if (typeof (Storage) === 'undefined') {
+      document.getElementById('header').innerHTML = 'Sorry, your browser does not support Web Storage...'
+      document.getElementById('button2').disabled = true
+    } else if (window.localStorage.getItem('setChatName') !== null) {
+      setChatName = window.localStorage.getItem('setChatName')
+    } else {
+      console.log('localStorage parameter setChatName is null, setting true')
+      setChatName = 'true'
+    }
     document.getElementById('button1').onclick = function () {
       StartApp1()
     }
-
     document.getElementById('button2').onclick = function () {
       StartApp2()
     }
     document.getElementById('button3').onclick = function () {
       StartApp3()
     }
+    document.getElementById('button4').onclick = function () {
+      StartApp4()
+    }
   })
 
   var xStart
   var yStart
   var tabindex = 0
+  var setChatName = null
 
   function StartApp1 () {
     let window1 = document.createElement('div')
@@ -40,8 +51,10 @@ function desktop () {
     topbarW1.setAttribute('class', 'topbarW1')
     window1.appendChild(topbarW1)
 
-    let text1 = document.createTextNode('My Window')
-    window1.appendChild(text1)
+    let textP = document.createElement('p')
+    window1.appendChild(textP)
+    let text1 = document.createTextNode('Memory Game')
+    textP.appendChild(text1)
 
     let memoryContainer = document.createElement('div')
     memoryContainer.setAttribute('id', 'memoryContainer')
@@ -77,7 +90,7 @@ function desktop () {
 
     var memory = require('./Memory')
     // memory.playMemory(4, 4, 'memoryContainer')
-    memory.playMemory(4, 4, memoryContainer)
+    memory.playMemory(4, 4, window1)
     tabindex++
   }
 
@@ -91,11 +104,11 @@ function desktop () {
     window2.addEventListener('focusin', WindowFocusin)
     window2.addEventListener('focusout', WindowFocusout)
 
-    let buttonW1 = document.createElement('button')
-    buttonW1.setAttribute('class', 'buttonW1')
-    window2.appendChild(buttonW1)
+    let buttonW2 = document.createElement('button')
+    buttonW2.setAttribute('class', 'buttonW1')
+    window2.appendChild(buttonW2)
 
-    buttonW1.onclick = function () {
+    buttonW2.onclick = function () {
       window2.remove()
     }
 
@@ -103,8 +116,11 @@ function desktop () {
     topbarW2.setAttribute('class', 'topbarW2')
     window2.appendChild(topbarW2)
 
-    let text1 = document.createTextNode('')
-    window2.appendChild(text1)
+    let paragraph2 = document.createElement('p')
+    paragraph2.setAttribute('id', 'chatName')
+    let text2 = document.createTextNode('Welcome ' + window.localStorage.getItem('username'))
+    paragraph2.appendChild(text2)
+    window2.appendChild(paragraph2)
 
     let chatContainer = document.createElement('div')
     chatContainer.setAttribute('id', 'chatContainer')
@@ -128,16 +144,43 @@ function desktop () {
     let messageText = document.createElement('textarea')
     messageText.setAttribute('class', 'messageArea')
     messageText.style.position = 'relative'
-    messageText.style.top = '-333px'
+    messageText.style.top = '-318px'
     messageText.style.left = '10px'
     chatDiv.appendChild(messageText)
-    // window2.appendChild(messageText)
 
     document.body.appendChild(window2)
 
     var Chat = require('./Chat')
-
     var chat = new Chat(window2)
+
+    if (setChatName === 'true') {
+      let nameinput = document.createElement('input')
+      nameinput.setAttribute('id', 'chatUsername')
+      let nameButton = document.createElement('button')
+      nameButton.setAttribute('id', 'nameButton')
+      let buttonText = document.createTextNode('Submit username')
+      nameButton.appendChild(buttonText)
+      window2.appendChild(nameinput)
+      window2.appendChild(nameButton)
+      messageText.disabled = true
+      var button2 = document.getElementById('button2')
+      button2.disabled = true
+      buttonW2.disabled = true
+
+      nameButton.onclick = function () {
+        chat.setUsername(nameinput.value)
+        window.localStorage.setItem('username', nameinput.value)
+        document.getElementById('chatName').innerHTML = 'Welcome ' + nameinput.value
+        window.localStorage.setItem('setChatName', false)
+        setChatName = window.localStorage.getItem('setChatName')
+        console.log(window.localStorage.getItem('setChatName'))
+        nameButton.remove()
+        nameinput.remove()
+        messageText.disabled = false
+        button2.disabled = false
+        buttonW2.disabled = false
+      }
+    }
 
     chat.connect().then(function (socket) {
       // chat.sendMessage('Hello')
@@ -207,6 +250,12 @@ function desktop () {
     button3.title = 'Only one video is allowed'
   }
 
+  function StartApp4 () {
+    window.localStorage.setItem('setChatName', 'true')
+    window.localStorage.setItem('username', '')
+    document.location.reload()
+  }
+
   function DragStarted (event) {
     let style = window.getComputedStyle(event.target)
     let top = style.getPropertyValue('top').split('px')
@@ -234,11 +283,11 @@ function desktop () {
     var yPos = yEnd - yStart + parseInt(top[0])
     event.target.style.top = yPos + 'px'
     event.target.style.left = xPos + 'px'
-    console.log('Finished dragging the window. xEnd:' + xEnd + ' yEnd:' + yEnd + ' xPos:' + xPos + ' yPos:' + yPos)
+    // console.log('Finished dragging the window. xEnd:' + xEnd + ' yEnd:' + yEnd + ' xPos:' + xPos + ' yPos:' + yPos)
   }
 
   function WindowFocusin (event) {
-    console.log('Element got focus ' + String(event.target.nodeName))
+    // console.log('Element got focus ' + String(event.target.nodeName))
     event.target.style.zIndex = 100
     if (String(event.target.nodeName) !== 'DIV') {
       event.target.parentNode.parentNode.parentNode.style.zIndex = 100
@@ -246,7 +295,7 @@ function desktop () {
   }
 
   function WindowFocusout (event) {
-    console.log('Element lost focus ' + String(event.target.nodeName))
+    // console.log('Element lost focus ' + String(event.target.nodeName))
     event.target.style.zIndex = 0
     if (String(event.target.nodeName) !== 'DIV') {
       event.target.parentNode.parentNode.parentNode.style.zIndex = 0
