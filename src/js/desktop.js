@@ -39,6 +39,10 @@ function desktop () {
     window1.addEventListener('focusin', WindowFocusin)
     window1.addEventListener('focusout', WindowFocusout)
 
+    let topbarW1 = document.createElement('div')
+    topbarW1.setAttribute('class', 'topbarW1')
+    window1.appendChild(topbarW1)
+
     let buttonW1 = document.createElement('button')
     buttonW1.setAttribute('class', 'buttonW1')
     window1.appendChild(buttonW1)
@@ -46,10 +50,6 @@ function desktop () {
     buttonW1.onclick = function () {
       window1.remove()
     }
-
-    let topbarW1 = document.createElement('div')
-    topbarW1.setAttribute('class', 'topbarW1')
-    window1.appendChild(topbarW1)
 
     let textP = document.createElement('p')
     window1.appendChild(textP)
@@ -104,17 +104,17 @@ function desktop () {
     window2.addEventListener('focusin', WindowFocusin)
     window2.addEventListener('focusout', WindowFocusout)
 
+    let topbarW2 = document.createElement('div')
+    topbarW2.setAttribute('class', 'topbarW2')
+    window2.appendChild(topbarW2)
+
     let buttonW2 = document.createElement('button')
-    buttonW2.setAttribute('class', 'buttonW1')
+    buttonW2.setAttribute('class', 'buttonW2')
     window2.appendChild(buttonW2)
 
     buttonW2.onclick = function () {
       window2.remove()
     }
-
-    let topbarW2 = document.createElement('div')
-    topbarW2.setAttribute('class', 'topbarW2')
-    window2.appendChild(topbarW2)
 
     let paragraph2 = document.createElement('p')
     paragraph2.setAttribute('id', 'chatName')

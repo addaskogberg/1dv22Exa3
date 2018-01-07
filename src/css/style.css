@@ -1,11 +1,11 @@
 body{
-  background-image: url("../stuðlaberg.jpg");
-  background-repeat: repeat-x;
-  color: rgb(255, 255, 255);
+  background-image: url("../image/stuðlaberg.jpg");
+  background-repeat: repeat;
+  color: rgb(252, 175, 175);
 }
 
 h1{
-  text-align: center;
+  text-align: left;
 }
 
 
@@ -18,8 +18,9 @@ h1{
   left: 0;
   height: 64px;
   width: 100%;
-  background-color: blue;
+  background-color: rgb(94, 94, 94);
 }
+
 
 button{
   margin: 0;
@@ -33,7 +34,15 @@ button{
   left: 0;
   height: 64px;
   width: 64px;
-  background-image: url("../image/memory.jpg");
+  background-image: url("../image/memory1.png"); 
+  background-color: transparent;
+}
+
+#button1:hover{
+  padding: 10px;
+  margin-bottom: 20px;
+  background-image: url("../image/memory1.png");
+  background-color: transparent;
 }
 
 #button2{
@@ -42,20 +51,45 @@ button{
   height: 64px;
   width: 64px;
   background-image: url("../image/chatIcon.png");
+  background-color: transparent;
+}
+
+#button2:hover{
+  padding: 10px;
+  margin-bottom: 20px;
+  background-image: url("../image/chatIcon.png");
+  background-color: transparent;
 }
 #button3{
   position: absolute;
   left: 128px;
   height: 64px;
   width: 64px;
-  background-image: url("../image/video.png");
+  background-image: url("../image/video1png.png");
+  background-color: transparent;
 }
+
+#button3:hover{
+  padding: 10px;
+  margin-bottom: 20px;
+  background-image: url("../image/video1png.png");
+  background-color: transparent;
+}
+
 #button4{
   position: absolute;
   left: 192px;
   height: 64px;
   width: 64px;
-  background-image: url("../image/video.png");
+  background-image: url("../image/clear.png");
+  background-color: transparent;
+}
+
+#button4:hover{
+  padding: 10px;
+  margin-bottom: 20px;
+  background-image: url("../image/clear.png");
+  background-color: transparent;
 }
 
 /* Dynamic content */
@@ -70,27 +104,27 @@ button{
   border: 1px solid black;
 }
 
+.topbarW1 {
+  position: relative;
+  top: -5px;
+  left: 0;
+  width: 282px;
+  height: 32px;
+  background-color: rgb(141, 240, 128);
+  background-image: url("../image/memory1.png");
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+  margin-bottom: -37px;
+
+}
 .buttonW1 {
   position: relative;
-  top: 0;
+  top: 0px;
   left: 250px;
   width: 32px;
   height: 32px;
   background-image: url("../image/buttonW1.png");
-}
-
-.topbarW1 {
-  position: relative;
-  top: -36px;
-  left: 0;
-  width: 250px;
-  height: 32px;
-  background-color: rgb(141, 240, 128);
-  background-image: url("../image/memory.jpg");
-  background-repeat: no-repeat;
-  background-size: 32px 32px;
-
-
+  background-color: transparent;
 }
 
 .memory img{
@@ -106,7 +140,7 @@ button{
   position:absolute; 
   top: 100px; 
   left: 100px; 
-  height: 380px; 
+  height: 398px; 
   width: 282px; 
   background-color: rgb(240, 240, 240);
   border: 1px solid black;
@@ -120,14 +154,24 @@ button{
 
 .topbarW2 {
   position: relative;
-  top: -36px;
+  top: 0px;
   left: 0;
-  width: 250px;
+  width: 282px;
   height: 32px;
   background-color: rgb(165, 164, 164);
   background-image: url("../image/chatIcon.png");
   background-repeat: no-repeat;
   background-size: 32px 32px;
+}
+
+.buttonW2 {
+  position: relative;
+  top: -33px;
+  left: 250px;
+  width: 32px;
+  height: 32px;
+  background-image: url("../image/buttonW1.png");
+  background-color: transparent;
 }
 
 .chat {
@@ -162,10 +206,10 @@ p {
   position: relative;
   top: -36px;
   left: -1px;
-  width: 250px;
+  width: 282px;
   height: 32px;
   background-color: lightcoral;
-  background-image: url("../image/video.png");
+  background-image: url("../image/video1png.png");
   background-repeat: no-repeat;
   background-size: 32px 32px;
 }
