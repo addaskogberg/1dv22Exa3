@@ -82,8 +82,8 @@ function desktop () {
     anchor.appendChild(img)
 
     if (tabindex > 0) {
-      window1.style.top = 100 + tabindex * 33 + 'px'
-      window1.style.left = 100 + tabindex * 33 + 'px'
+      window1.style.top = 100 + tabindex % 10 * 33 + 'px'
+      window1.style.left = 100 + tabindex % 34 * 33 + 'px'
     }
 
     document.body.appendChild(window1)
@@ -158,7 +158,7 @@ function desktop () {
       nameinput.setAttribute('id', 'chatUsername')
       let nameButton = document.createElement('button')
       nameButton.setAttribute('id', 'nameButton')
-      let buttonText = document.createTextNode('Submit username')
+      let buttonText = document.createTextNode('Submit name')
       nameButton.appendChild(buttonText)
       window2.appendChild(nameinput)
       window2.appendChild(nameButton)
@@ -173,12 +173,13 @@ function desktop () {
         document.getElementById('chatName').innerHTML = 'Welcome ' + nameinput.value
         window.localStorage.setItem('setChatName', false)
         setChatName = window.localStorage.getItem('setChatName')
-        console.log(window.localStorage.getItem('setChatName'))
         nameButton.remove()
         nameinput.remove()
         messageText.disabled = false
         button2.disabled = false
         buttonW2.disabled = false
+        let name = document.getElementById('chatName')
+        name.parentNode.style.zIndex = 100
       }
     }
 
@@ -187,8 +188,8 @@ function desktop () {
     })
 
     if (tabindex > 0) {
-      window2.style.top = 100 + tabindex * 33 + 'px'
-      window2.style.left = 100 + tabindex * 33 + 'px'
+      window2.style.top = 100 + tabindex % 10 * 33 + 'px'
+      window2.style.left = 100 + tabindex % 34 * 33 + 'px'
     }
 
     tabindex++
@@ -204,13 +205,13 @@ function desktop () {
     window3.addEventListener('focusin', WindowFocusin)
     window3.addEventListener('focusout', WindowFocusout)
 
-    let buttonW1 = document.createElement('button')
-    buttonW1.setAttribute('class', 'buttonW1')
-    window3.appendChild(buttonW1)
-
     let topbarW3 = document.createElement('div')
     topbarW3.setAttribute('class', 'topbarW3')
     window3.appendChild(topbarW3)
+    let buttonW1 = document.createElement('button')
+
+    buttonW1.setAttribute('class', 'buttonW3')
+    window3.appendChild(buttonW1)
 
     let text1 = document.createTextNode('')
     window3.appendChild(text1)
@@ -218,8 +219,8 @@ function desktop () {
     let videoView = document.createElement('video')
     videoView.setAttribute('id', 'video')
     videoView.setAttribute('autoplay', 'autoplay')
-    videoView.style.width = '280px'
-    videoView.style.height = '210px'
+    videoView.style.width = '400px'
+    videoView.style.height = '300px'
     window3.appendChild(videoView)
 /*
     let canvas = document.createElement('canvas')
@@ -239,8 +240,8 @@ function desktop () {
     }
 
     if (tabindex > 0) {
-      window3.style.top = 100 + tabindex * 33 + 'px'
-      window3.style.left = 100 + tabindex * 33 + 'px'
+      window3.style.top = 100 + tabindex % 10 * 33 + 'px'
+      window3.style.left = 100 + tabindex % 34 * 33 + 'px'
     }
     tabindex++
 
@@ -287,17 +288,37 @@ function desktop () {
   }
 
   function WindowFocusin (event) {
-    // console.log('Element got focus ' + String(event.target.nodeName))
+    console.log('Element got focus ' + String(event.target.nodeName))
     event.target.style.zIndex = 100
-    if (String(event.target.nodeName) !== 'DIV') {
+    if (String(event.target.parentNode.nodeName) !== 'BODY') {
+      event.target.parentNode.style.zIndex = 100
+    } else {
+      return
+    }
+    if (String(event.target.parentNode.parentNode.nodeName) !== 'BODY') {
+      event.target.parentNode.parentNode.style.zIndex = 100
+    } else {
+      return
+    }
+    if (String(event.target.parentNode.parentNode.parentNode.nodeName) !== 'BODY') {
       event.target.parentNode.parentNode.parentNode.style.zIndex = 100
     }
   }
 
   function WindowFocusout (event) {
-    // console.log('Element lost focus ' + String(event.target.nodeName))
+    console.log('Element lost focus ' + String(event.target.nodeName))
     event.target.style.zIndex = 0
-    if (String(event.target.nodeName) !== 'DIV') {
+    if (String(event.target.parentNode.nodeName) !== 'BODY') {
+      event.target.parentNode.style.zIndex = 0
+    } else {
+      return
+    }
+    if (String(event.target.parentNode.parentNode.nodeName) !== 'BODY') {
+      event.target.parentNode.parentNode.style.zIndex = 0
+    } else {
+      return
+    }
+    if (String(event.target.parentNode.parentNode.parentNode.nodeName) !== 'BODY') {
       event.target.parentNode.parentNode.parentNode.style.zIndex = 0
     }
   }
