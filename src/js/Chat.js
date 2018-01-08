@@ -85,10 +85,20 @@ Chat.prototype.printMessage = function (message) {
   pAuthor.setAttribute('class', 'author')
   messageDiv.appendChild(pAuthor)
 
-  messageDiv.childNodes[0].textContent = message.data
-  messageDiv.childNodes[1].textContent = message.username
+  messageDiv.childNodes[0].innerHTML = replaceToEmoji(String(message.data))
+  messageDiv.childNodes[1].innerHTML = replaceToEmoji(String(message.username))
+ // messageDiv.childNodes[1].textContent = message.username
 
   this.chatDiv.childNodes[0].insertBefore(messageDiv, this.chatDiv.childNodes[0].childNodes[0])
+}
+// implements emoji
+function replaceToEmoji (text) {
+  text = text.replace(':)', '&#x1F642;')
+  text = text.replace('<3', '&#x1F497;')
+  text = text.replace(':D', '&#x1F923;')
+  text = text.replace('cat', '&#x1F63A;')
+  text = text.replace('poo', '&#x1F4A9;')
+  return text
 }
 
 // takes the input username when button is clicked
