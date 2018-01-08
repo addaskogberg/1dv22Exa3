@@ -83,8 +83,8 @@ function desktop () {
     anchor.appendChild(img)
 
     if (tabindex > 0) {
-      window1.style.top = 100 + tabindex % 10 * 33 + 'px'
-      window1.style.left = 100 + tabindex % 34 * 33 + 'px'
+      window1.style.top = 100 + tabindex % 10 * 33 + 'px' // bounce vertical
+      window1.style.left = 100 + tabindex % 34 * 33 + 'px'// bounce horisontal
     }
 
     document.body.appendChild(window1)
@@ -190,8 +190,8 @@ function desktop () {
     })
 
     if (tabindex > 0) {
-      window2.style.top = 100 + tabindex % 10 * 33 + 'px'
-      window2.style.left = 100 + tabindex % 34 * 33 + 'px'
+      window2.style.top = 100 + tabindex % 10 * 33 + 'px' // bounce vertical
+      window2.style.left = 100 + tabindex % 34 * 33 + 'px'// bounce horisontal
     }
 
     tabindex++
@@ -316,7 +316,7 @@ function desktop () {
     }
   }
   /**
-   * places the window in front when other window is clicked behind
+   * places the window behind the clicked window
    * @param  {} event
    */
   function WindowFocusout (event) {

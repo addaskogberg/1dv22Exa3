@@ -91,6 +91,7 @@ Chat.prototype.printMessage = function (message) {
   this.chatDiv.childNodes[0].insertBefore(messageDiv, this.chatDiv.childNodes[0].childNodes[0])
 }
 
+// takes the input username when button is clicked
 Chat.prototype.setUsername = function (name) {
   username = name
 }
