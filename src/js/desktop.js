@@ -236,13 +236,15 @@ function desktop () {
       video.stopVideo()
       window3.remove()
     }
-
-    if (tabindex > 0) {
-      window3.style.top = 250 + tabindex % 10 * 33 + 'px'
-      window3.style.left = 900 + tabindex % 34 * 33 + 'px'
+    // keeping this code in case there are changes in how the video should be presented
+/*
+    if (tabindex >= 0) {
+      window3.style.top = 100 + tabindex % 10 * 33 + 'px' // decided to open the video ofset the other two windows
+      window3.style.left = 100 + tabindex % 34 * 33 + 'px' // can be changed depending on preference
     }
     tabindex++
-    console.log(tabindex)
+    console.log(tabindex) */
+
     var button3 = document.getElementById('button3')// once activated the button is disabled and opaque
     button3.disabled = true
     button3.style.opacity = 0.4
