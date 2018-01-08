@@ -2,7 +2,7 @@ var config = require('./config.json')
 var username = window.localStorage.getItem('username')
 
 /**
- *
+ * listener listening to the enter key to send message
  * @param  {} container
  */
 function Chat (container) {
