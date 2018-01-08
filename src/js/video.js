@@ -13,15 +13,10 @@ function startVideo () {
       videoStream = stream
       video.src = window.URL.createObjectURL(stream)
       video.play()
-      /* let tracks = stream.getTracks()
-      tracks.forEach(function (track) {
-        track.stop()
-      })
-      video.srcObject = null */
     })
   }
 }
-
+// stopp videostream
 function stopVideo () {
   let tracks = videoStream.getTracks()
   tracks.forEach(function (track) {

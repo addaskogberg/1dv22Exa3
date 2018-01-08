@@ -28,7 +28,10 @@ function desktop () {
   var yStart
   var tabindex = 0
   var setChatName = null
-
+  /**
+   * starts the memory game, sets the elements and handles the tabindex ie position of
+   * next opened window.
+   */
   function StartApp1 () {
     let window1 = document.createElement('div')
     window1.setAttribute('class', 'window1')
@@ -76,8 +79,6 @@ function desktop () {
     let img = document.createElement('img')
     img.setAttribute('src', '../image/0.png')
     img.setAttribute('alt', 'A memory brick')
-    // img.addEventListener('focusin', WindowFocusin)
-    // img.addEventListener('focusout', WindowFocusout)
 
     anchor.appendChild(img)
 
@@ -89,11 +90,12 @@ function desktop () {
     document.body.appendChild(window1)
 
     var memory = require('./Memory')
-    // memory.playMemory(4, 4, 'memoryContainer')
     memory.playMemory(4, 4, window1)
     tabindex++
   }
-
+  /**
+   * starts the chat sets the elements and positions new windows
+   */
   function StartApp2 () {
     let window2 = document.createElement('div')
     window2.setAttribute('class', 'window2')
@@ -153,7 +155,7 @@ function desktop () {
     var Chat = require('./Chat')
     var chat = new Chat(window2)
 
-    if (setChatName === 'true') {
+    if (setChatName === 'true') { // if there is no chatter name in local storage chatter must submit a name.
       let nameinput = document.createElement('input')
       nameinput.setAttribute('id', 'chatUsername')
       let nameButton = document.createElement('button')
@@ -167,7 +169,7 @@ function desktop () {
       button2.disabled = true
       buttonW2.disabled = true
 
-      nameButton.onclick = function () {
+      nameButton.onclick = function () { // adds the username submitted and hides input field and button
         chat.setUsername(nameinput.value)
         window.localStorage.setItem('username', nameinput.value)
         document.getElementById('chatName').innerHTML = 'Welcome ' + nameinput.value
@@ -184,7 +186,7 @@ function desktop () {
     }
 
     chat.connect().then(function (socket) {
-      // chat.sendMessage('Hello')
+      // open the connection to the server
     })
 
     if (tabindex > 0) {
@@ -194,7 +196,9 @@ function desktop () {
 
     tabindex++
   }
-
+  /**
+   * creates the elements for the window and starts the video
+   */
   function StartApp3 () {
     let window3 = document.createElement('div')
     window3.setAttribute('class', 'window3')
@@ -222,41 +226,40 @@ function desktop () {
     videoView.style.width = '400px'
     videoView.style.height = '300px'
     window3.appendChild(videoView)
-/*
-    let canvas = document.createElement('canvas')
-    canvas.setAttribute('id', 'canvas')
-    canvas.style.width = '280px'
-    canvas.style.height = '210px'
-    window3.appendChild(canvas)
-*/
+
     document.body.appendChild(window3)
 
     var video = require('./video')
     video.startVideo()
 
-    buttonW1.onclick = function () {
+    buttonW1.onclick = function () { // stops the camera and closes the window
       video.stopVideo()
       window3.remove()
     }
 
     if (tabindex > 0) {
-      window3.style.top = 100 + tabindex % 10 * 33 + 'px'
-      window3.style.left = 100 + tabindex % 34 * 33 + 'px'
+      window3.style.top = 250 + tabindex % 10 * 33 + 'px'
+      window3.style.left = 900 + tabindex % 34 * 33 + 'px'
     }
     tabindex++
-
-    var button3 = document.getElementById('button3')
+    console.log(tabindex)
+    var button3 = document.getElementById('button3')// once activated the button is disabled and opaque
     button3.disabled = true
     button3.style.opacity = 0.4
     button3.title = 'Only one video is allowed'
   }
-
+  /**
+   * button 4 reloads and empties local storage
+   */
   function StartApp4 () {
     window.localStorage.setItem('setChatName', 'true')
     window.localStorage.setItem('username', '')
     document.location.reload()
   }
-
+  /**
+   * drag started on a window. What is the position and set window opaque.
+   * @param  {} event
+   */
   function DragStarted (event) {
     let style = window.getComputedStyle(event.target)
     let top = style.getPropertyValue('top').split('px')
@@ -270,7 +273,10 @@ function desktop () {
   // Change the opacity of the draggable element
     event.target.style.opacity = '0.4'
   }
-
+  /**
+   * drag stopped on the window. Sets the new position and the window is no longer opaque
+   * @param  {} event
+   */
   function DragEnded (event) {
     let style = window.getComputedStyle(event.target)
     let top = style.getPropertyValue('top').split('px')
@@ -286,7 +292,10 @@ function desktop () {
     event.target.style.left = xPos + 'px'
     // console.log('Finished dragging the window. xEnd:' + xEnd + ' yEnd:' + yEnd + ' xPos:' + xPos + ' yPos:' + yPos)
   }
-
+  /**
+   * places the window clicked in front of other windows
+   * @param  {} event
+   */
   function WindowFocusin (event) {
     console.log('Element got focus ' + String(event.target.nodeName))
     event.target.style.zIndex = 100
@@ -304,7 +313,10 @@ function desktop () {
       event.target.parentNode.parentNode.parentNode.style.zIndex = 100
     }
   }
-
+  /**
+   * places the window in front when other window is clicked behind
+   * @param  {} event
+   */
   function WindowFocusout (event) {
     console.log('Element lost focus ' + String(event.target.nodeName))
     event.target.style.zIndex = 0

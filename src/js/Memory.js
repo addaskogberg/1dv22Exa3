@@ -2,9 +2,14 @@ module.exports = {
   playMemory: playMemory,
   shuffel: getPictureArray
 }
-
+/**
+ * adds the elements with the array created
+ * eventlistner listening on click and enter on the images
+ * @param  {} rows
+ * @param  {} cols
+ * @param  {} container
+ */
 function playMemory (rows, cols, container) {
- // var i
   var a
   var tiles = []
   var turn1
@@ -15,14 +20,8 @@ function playMemory (rows, cols, container) {
 
   tiles = getPictureArray(rows, cols)
 
-  // container = document.getElementById(container)
-  // container = document.getElementsByClassName(container)
-  // console.log(container[0])
-  // var templateDiv = document.querySelectorAll('#memoryContainer template')[0].content.firstElementChild
   var templateDiv = container.childNodes[3].childNodes[0].childNodes[0]
   var result = container.childNodes[2]
- // console.log(templateDiv)
- // console.log(result)
 
   var div = document.importNode(templateDiv, false)
 
@@ -39,12 +38,19 @@ function playMemory (rows, cols, container) {
   div.addEventListener('click', function (event) {
     event.preventDefault()
     var img = event.target.nodeName === 'IMG' ? event.target : event.target.firstElementChild
-
+    console.log(event.target)
     var index = parseInt(img.getAttribute('data-bricknumber'))
     turnBrick(tiles[index], index, img)
   })
   container.appendChild(div)
 
+  /**
+   * turns the brick, counts the number of tries
+   * identifies pairs and removes them from the window
+   * @param  {} tile
+   * @param  {} index
+   * @param  {} img
+   */
   function turnBrick (tile, index, img) {
     if (turn2) { return }
     img.src = 'image/' + tile + '.png'
@@ -66,7 +72,6 @@ function playMemory (rows, cols, container) {
 
         if (pairs === (cols * rows) / 2) {
           console.log('win on' + tries + 'number of tries')
-         // result.childNodes[0] = 'test'
           result.textContent = 'You won on ' + tries + ' number of tries'
         }
         window.setTimeout(function () {
@@ -80,7 +85,7 @@ function playMemory (rows, cols, container) {
             console.log(window1)
             window1.style.zIndex = 80
           }, 10)
-        }, 500)
+        }, 300)
       } else {
         window.setTimeout(function () {
           turn1.src = 'image/0.png'
@@ -88,12 +93,16 @@ function playMemory (rows, cols, container) {
 
           turn1 = null
           turn2 = null
-        }, 500)
+        }, 300)
       }
     }
   }
 }
-
+/**
+ * places the tiles in random order in an array
+ * @param  {} row
+ * @param  {} cols
+ */
 function getPictureArray (row, cols) {
   var i
   var arr = []

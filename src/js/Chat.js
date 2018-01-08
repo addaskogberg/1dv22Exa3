@@ -1,6 +1,10 @@
 var config = require('./config.json')
 var username = window.localStorage.getItem('username')
 
+/**
+ *
+ * @param  {} container
+ */
 function Chat (container) {
   this.socket = null
   var chatContainer = container.childNodes[3]
@@ -19,7 +23,9 @@ function Chat (container) {
   }.bind(this))
   chatContainer.appendChild(this.chatDiv)
 }
-
+/**
+ * connects to server
+ */
 Chat.prototype.connect = function () {
   return new Promise(function (resolve, reject) {
     if (this.socket && this.socket.readyState === 1) {
@@ -44,7 +50,10 @@ Chat.prototype.connect = function () {
     }.bind(this))
   }.bind(this))
 }
-
+/**
+ * sends the data including the message written
+ * @param  {} text
+ */
 Chat.prototype.sendMessage = function (text) {
   var data = {
     type: 'message',
@@ -53,7 +62,6 @@ Chat.prototype.sendMessage = function (text) {
     channel: '',
     key: config.key
   }
-
   this.connect().then(function (socket) {
     socket.send(JSON.stringify(data))
     console.log('sending message', text)
@@ -61,7 +69,10 @@ Chat.prototype.sendMessage = function (text) {
     console.log('something wrong', error)
   })
 }
-
+/**
+ * creates the elements for the message and username and adds them
+ * @param  {} message
+ */
 Chat.prototype.printMessage = function (message) {
   let messageDiv = document.createElement('div')
   messageDiv.setAttribute('class', 'message')
@@ -79,9 +90,12 @@ Chat.prototype.printMessage = function (message) {
 
   this.chatDiv.childNodes[0].insertBefore(messageDiv, this.chatDiv.childNodes[0].childNodes[0])
 }
-
+/**
+ * @param  {} name
+ */
 Chat.prototype.setUsername = function (name) {
   username = name
+  console.log(username)
 }
 
 module.exports = Chat
