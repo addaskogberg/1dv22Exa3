@@ -182,12 +182,15 @@ function desktop () {
         buttonW2.disabled = false
         let name = document.getElementById('chatName')
         name.parentNode.style.zIndex = 100
+       /*  chat.connect().then(function (socket) {
+          // open the connection to the server
+        }) */
       }
     }
 
-    chat.connect().then(function (socket) {
+    /* chat.connect().then(function (socket) {
       // open the connection to the server
-    })
+    }) */
 
     if (tabindex > 0) {
       window2.style.top = 100 + tabindex % 10 * 33 + 'px' // bounce vertical

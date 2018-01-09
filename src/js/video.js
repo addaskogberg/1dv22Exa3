@@ -5,7 +5,7 @@ module.exports = {
 var videoStream
 var video = document.getElementById('video')
 function startVideo () {
-// access camera, microphone and loudspeakers
+// access camera, microphone and loudspeakers, WEBRTC
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(function (stream) {
       videoStream = stream

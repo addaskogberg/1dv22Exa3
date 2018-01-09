@@ -50,6 +50,7 @@ Chat.prototype.connect = function () {
     }.bind(this))
   }.bind(this))
 }
+
 /**
  * sends the data including the message written
  * @param  {} text
@@ -69,6 +70,7 @@ Chat.prototype.sendMessage = function (text) {
     console.log('something wrong', error)
   })
 }
+
 /**
  * creates the elements for the message and username and adds them
  * @param  {} message
@@ -87,7 +89,7 @@ Chat.prototype.printMessage = function (message) {
 
   messageDiv.childNodes[0].innerHTML = replaceToEmoji(String(message.data))
   messageDiv.childNodes[1].innerHTML = replaceToEmoji(String(message.username))
- // messageDiv.childNodes[1].textContent = message.username
+ // messageDiv.childNodes[1].textContent = message.username // can be used if you don't want emoji support in username
 
   this.chatDiv.childNodes[0].insertBefore(messageDiv, this.chatDiv.childNodes[0].childNodes[0])
 }
